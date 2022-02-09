@@ -23,3 +23,12 @@ all.dates <-seq(from = unemp$DATE[1],to = tail(unemp$DATE,1),by="months")
 rand.unemp = rand.unemp[J(all.dates),roll=0]
 bias.unemp = bias.unemp[J(all.dates),roll=0]
 rand.unemp[,rpt :=is.na(UNRATE)]
+
+# 前方埋め
+rand.unemp[,impute.ff := na.locf(UNRATE,na.rm=FALSE)]
+bias.unemp[,impute.ff := na.locf(UNRATE,na.rm=FALSE)]
+
+# 350~400までをプロット
+unemp[350:400,plot(DATE,UNRATE,col=1,lwd=2,type="b")]
+rand.unemp[350:400,lines(DATE, impute.ff, col=2,lwd=2,lty=2)]
+rand.unemp[350:400,rpt==TRUE,points(DATE,impute.ff,col=2,pch=6,cex=2)]
