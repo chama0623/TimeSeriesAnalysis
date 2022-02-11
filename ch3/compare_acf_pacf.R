@@ -59,3 +59,9 @@ pacf(y2,lag.max=30)
 plot(y[1:100],type="b")
 acf(y,lag.max=30)
 pacf(y,lag.max=30)
+
+# 非定常なデータのacf,pacf
+x<-1:100
+plot(x)
+acf(x,lag.ma=30)
+pacf(x,lag.ma=30)
